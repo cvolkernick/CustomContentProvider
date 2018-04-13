@@ -4,12 +4,16 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,52 +30,67 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // CREATE OUR CUSTOM STATE LIST DRAWABLE
+        StateListDrawable drawable = new StateListDrawable();
+
+        // ON PRESS/CLICK BACKGROUND
+        drawable.addState(new int[]{android.R.attr.state_pressed},new ColorDrawable(Color.YELLOW));
+
+        // DEFAULT BACKGROUND
+        drawable.addState(new int[]{}, new ColorDrawable(Color.CYAN));
+
+        //find button
+        Button button = findViewById(R.id.btnSaveData);
+
+        // set background drawable
+        button.setBackgroundDrawable(drawable);
     }
 
-    public void saveData(View view) {
-        try {
-            TextView nameTextview = (TextView) findViewById(R.id.name);
-            TextView ageTextview = (TextView) findViewById(R.id.age);
-            TextView emailTextview = (TextView) findViewById(R.id.email);
-            TextView phoneTextview = (TextView) findViewById(R.id.phone);
-
-            if (TextUtils.isEmpty(nameTextview.getText())) {
-                showMessage("Name cannot be ampty.!", false);
-                return;
-            }
-
-            ContentValues values = new ContentValues();
-            values.put(EmployeeContract.COLUMN_NAME, nameTextview.getText().toString().trim());
-            values.put(EmployeeContract.COLUMN_AGE, ageTextview.getText().toString().trim());
-            values.put(EmployeeContract.COLUMN_EMAIL, emailTextview.getText().toString().trim());
-            values.put(EmployeeContract.COLUMN_PHONE, phoneTextview.getText().toString().trim());
-
-            //ContentResolver will access the Employee Content Provider
-            Uri newUri = getContentResolver().insert(EmployeeContract.EMPLOYEE_URI, values);
-
-            String newUserId = newUri.getLastPathSegment();
-
-            showMessage("Successfully saved. New User ID is " + newUserId, true);
-
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+//    public void saveData(View view) {
+//        try {
+//            TextView nameTextview = (TextView) findViewById(R.id.name);
+//            TextView ageTextview = (TextView) findViewById(R.id.age);
+//            TextView emailTextview = (TextView) findViewById(R.id.email);
+//            TextView phoneTextview = (TextView) findViewById(R.id.phone);
+//
+//            if (TextUtils.isEmpty(nameTextview.getText())) {
+//                showMessage("Name cannot be ampty.!", false);
+//                return;
+//            }
+//
+//            ContentValues values = new ContentValues();
+//            values.put(EmployeeContract.COLUMN_NAME, nameTextview.getText().toString().trim());
+//            values.put(EmployeeContract.COLUMN_AGE, ageTextview.getText().toString().trim());
+//            values.put(EmployeeContract.COLUMN_EMAIL, emailTextview.getText().toString().trim());
+//            values.put(EmployeeContract.COLUMN_PHONE, phoneTextview.getText().toString().trim());
+//
+//            //ContentResolver will access the Employee Content Provider
+//            Uri newUri = getContentResolver().insert(EmployeeContract.EMPLOYEE_URI, values);
+//
+//            String newUserId = newUri.getLastPathSegment();
+//
+//            showMessage("Successfully saved. New User ID is " + newUserId, true);
+//
+//
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        TextView nameTextview = (TextView) findViewById(R.id.name);
-        TextView ageTextview = (TextView) findViewById(R.id.age);
-        TextView emailTextview = (TextView) findViewById(R.id.email);
-        TextView phoneTextview = (TextView) findViewById(R.id.phone);
-
-        nameTextview.setText("");
-        ageTextview.setText("");
-        emailTextview.setText("");
-        phoneTextview.setText("");
+//        TextView nameTextview = (TextView) findViewById(R.id.name);
+//        TextView ageTextview = (TextView) findViewById(R.id.age);
+//        TextView emailTextview = (TextView) findViewById(R.id.email);
+//        TextView phoneTextview = (TextView) findViewById(R.id.phone);
+//
+//        nameTextview.setText("");
+//        ageTextview.setText("");
+//        emailTextview.setText("");
+//        phoneTextview.setText("");
     }
 
     private void showMessage(String message, final Boolean successfullySaved) {
