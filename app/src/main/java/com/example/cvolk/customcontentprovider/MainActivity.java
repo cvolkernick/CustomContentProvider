@@ -3,6 +3,7 @@ package com.example.cvolk.customcontentprovider;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cvolk.customcontentprovider.contracts.EmployeeContract;
 import com.example.cvolk.customcontentprovider.model.Employee;
@@ -107,7 +109,9 @@ public class MainActivity extends AppCompatActivity {
 
             //ContentResolver will access the Employee Content Provider
             Uri newUri = getContentResolver().insert(EmployeeContract.EMPLOYEE_URI, values);
-        }
 
+            Cursor cursor = getContentResolver().query(EmployeeContract.EMPLOYEE_URI, null, null, null, null);
+            Toast.makeText(this, "count in Content Provider : " +  cursor.getCount(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

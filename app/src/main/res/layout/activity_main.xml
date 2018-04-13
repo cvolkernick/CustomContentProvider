@@ -8,6 +8,13 @@
     tools:layout_editor_absoluteY="8dp"
     android:orientation="vertical"
     >
+
+    <ImageView
+        android:src="@drawable/rectangle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--
     <LinearLayout
         android:id="@+id/elementWrapper"
         android:layout_width="match_parent"
@@ -225,7 +232,7 @@
 
 
     </LinearLayout>
-
+-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

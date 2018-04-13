@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     public Cursor getEmployeeDetails() {
         try {
             //I copied this uri from EmployeeProviderApp.
-            Uri employeeUri = Uri.parse("content://com.example.cvolk.customcontentproviderprovider/employee");
+            Uri employeeUri = Uri.parse("content://com.example.cvolk.customcontentprovider/employee");
             String[] projection = { "_id", "name", "email"}; //you should call _id
 
             String selection = "";
